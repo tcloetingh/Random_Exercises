@@ -1,22 +1,34 @@
+module Luhn
 
-  def is_valid?(number)
-    
-    seperated_digits = []
-    seperated_digits << number.split() 
-    
-    check_sum = seperated_digits.sum
+    def self.is_valid?(numbers)
+        
+        seperate_integers = numbers.to_s.split('').map(&:to_i)   
 
-    # if digit is >= 10... subtract 9
-    #map this to every digit
-    #sum all of those digits
-    #if the sum is even return true, false if not
+        double = []
 
-    if check_sum % 10 == 0
-      return true
-    else 
-      return false
+        seperate_integers.reverse.each_with_index do |e, index|
+            if ((index + 1) % 2 == 0) then
+                double.push(e * 2)
+            else 
+                double.push(e)
+            end
+        end
+
+
+        more_than_ten = double.map{|e| if e >= 10 then e - 9 else e end}
+
+        sum = 0
+
+        more_than_ten.each{|e| sum += e}
+
+
+        
+         if sum % 10 == 0
+             return true
+         else
+             return false
+         end
+
     end
-  end
-
-is_valid?(4545343455334.to_s)
+end
 
