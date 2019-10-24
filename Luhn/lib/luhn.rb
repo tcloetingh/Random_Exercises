@@ -30,5 +30,8 @@ module Luhn
          end
 
     end
+
+    is_valid?(4545555533339090).inspect
 end
 
+    
